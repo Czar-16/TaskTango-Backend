@@ -1,4 +1,4 @@
-import { Task } from "../models/task.model";
+import { Task } from "../models/task.model.js";
 
 const addTasks = async (req, res) => {
   try {
@@ -25,10 +25,10 @@ const getAllTask = async (req, res) => {
 
 const deleteTask = async (req, res) => {
   try {
-    const id = req.params;
+    const id = req.params.id;
     const toBeRemoved = await Task.findByIdAndDelete(id);
     if (!toBeRemoved) {
-      res.status(404).json({ error: "Task not found" });
+      return res.status(404).json({ error: "Task not found" });
     }
     res.status(200).json({ message: "Task deleted successfully", id });
   } catch (error) {

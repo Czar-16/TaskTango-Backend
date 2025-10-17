@@ -6,6 +6,7 @@ connectDB()
   .then(() => {
     app.listen(process.env.PORT || 8080, () => {
       console.log(`Server is running at ${process.env.PORT}`);
+      console.log(`http://localhost:${process.env.PORT}/api/tasks`);
     });
   })
   .catch((error) => {
