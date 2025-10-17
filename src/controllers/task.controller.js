@@ -23,6 +23,20 @@ const getAllTask = async (req, res) => {
   }
 };
 
+const updateTask = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const update = req.body;
+
+    const updated = await Task.findByIdAndUpdate(id, update, { new: true });
+    if (!updated)
+      return res.status(404).json({ error: "Task not found for updation" });
+    res.json(updated);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to update the Todo" });
+  }
+};
+
 const deleteTask = async (req, res) => {
   try {
     const id = req.params.id;
@@ -36,4 +50,4 @@ const deleteTask = async (req, res) => {
   }
 };
 
-export { addTasks, getAllTask, deleteTask };
+export { addTasks, getAllTask, updateTask, deleteTask };
